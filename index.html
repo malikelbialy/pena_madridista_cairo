@@ -3,317 +3,460 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - Peña Madridista Cairo</title>
+<title>Peña Madridista - Café Madrid Cairo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --gold:#F5C518;--gold2:#e6a800;
-  --red:#C8102E;--dark:#0a0a0a;
-  --gray:#161616;--lgray:#222;--border:#2e2e2e;--white:#fff;
+  --gold:#F5C518;--gold2:#d4a800;--red:#C8102E;
+  --dark:#07080a;--gray:#0d1117;--card:#131922;
+  --card2:#192030;--border:#1e2840;
+  --white:#eef2ff;--muted:#7a8599;
 }
-body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--dark);color:var(--white);min-height:100vh;}
+body{font-family:'Cairo',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;overflow-x:hidden;}
 
-header{
-  background:linear-gradient(135deg,#0a0a0a,#1a0a00);
-  border-bottom:2px solid var(--gold);
-  padding:0 1.5rem;height:68px;
+/* ===== NAV ===== */
+nav{
+  background:rgba(7,8,10,.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+  padding:0 2rem;height:70px;
   display:flex;align-items:center;justify-content:space-between;
 }
-.hdr-logo{display:flex;align-items:center;gap:12px;}
-.hdr-logo img{height:48px;border-radius:50%;border:2px solid var(--gold);}
-.hdr-title{font-size:1rem;font-weight:700;color:var(--gold);line-height:1.3;}
-.hdr-title span{font-size:11px;color:#888;font-weight:400;display:block;}
-
-.layout{display:flex;min-height:calc(100vh - 68px);}
-
-.sidebar{
-  width:210px;background:var(--gray);
-  border-left:1px solid var(--border);
-  padding:1rem 0;flex-shrink:0;
+.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.nav-logo-img{
+  width:46px;height:46px;border-radius:50%;
+  border:2px solid var(--gold);object-fit:cover;
+  box-shadow:0 0 12px rgba(245,197,24,.3);
 }
-.sb-btn{
-  display:flex;align-items:center;gap:10px;
-  width:100%;padding:11px 1.2rem;
-  background:none;border:none;color:#999;
-  font-size:13px;cursor:pointer;text-align:right;
-  font-family:inherit;transition:all .15s;
-  border-right:3px solid transparent;
+.nav-logo-txt strong{font-size:14px;color:var(--gold);display:block;line-height:1.2;}
+.nav-logo-txt span{font-size:10.5px;color:var(--muted);}
+.nav-links{display:flex;gap:4px;}
+.nb{
+  background:none;border:none;color:var(--muted);
+  padding:8px 13px;border-radius:10px;cursor:pointer;
+  font-size:12.5px;font-weight:700;transition:all .18s;
+  font-family:'Cairo',sans-serif;letter-spacing:.2px;
 }
-.sb-btn:hover{background:var(--lgray);color:var(--white);}
-.sb-btn.active{background:var(--lgray);color:var(--gold);border-right-color:var(--gold);}
+.nb:hover{color:var(--white);background:rgba(255,255,255,.06);}
+.nb.active{background:rgba(245,197,24,.12);color:var(--gold);border:1px solid rgba(245,197,24,.25);}
 
-.content{flex:1;padding:1.5rem;overflow-y:auto;}
-.panel{display:none;}
-.panel.active{display:block;}
-.panel-title{
-  font-size:1.2rem;font-weight:700;color:var(--gold);
-  margin-bottom:1.2rem;padding-bottom:10px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:8px;
+/* ===== HERO ===== */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:520px;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:4rem 2rem;
 }
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%,rgba(245,197,24,.13) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%,rgba(200,16,46,.08) 0%,transparent 50%),
+    linear-gradient(180deg,#0d0f14 0%,var(--dark) 100%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(245,197,24,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,197,24,.04) 1px,transparent 1px);
+  background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 0%,transparent 80%);
+}
+.hero-content{position:relative;z-index:1;}
+.hero-logo-ring{
+  width:150px;height:150px;border-radius:50%;
+  border:3px solid rgba(245,197,24,.4);
+  padding:4px;margin:0 auto 24px;
+  background:radial-gradient(circle,rgba(245,197,24,.08),transparent);
+  box-shadow:0 0 60px rgba(245,197,24,.2),0 0 120px rgba(245,197,24,.08);
+  animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 40px rgba(245,197,24,.2),0 0 80px rgba(245,197,24,.08);}50%{box-shadow:0 0 70px rgba(245,197,24,.35),0 0 140px rgba(245,197,24,.12);}}
+.hero-logo-img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.hero-logo-fallback{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:var(--card);}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.25);
+  color:#ff4d6d;padding:5px 16px;border-radius:20px;
+  font-size:11px;font-weight:800;letter-spacing:1.5px;
+  margin-bottom:16px;text-transform:uppercase;
+}
+.hero h1{
+  font-size:2.6rem;font-weight:900;
+  background:linear-gradient(135deg,#fff 0%,var(--gold) 60%,#e6a800 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.1;margin-bottom:10px;
+}
+.hero-sub{font-size:1rem;color:var(--muted);margin-bottom:20px;}
+.hero-chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.chip{
+  padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;
+  backdrop-filter:blur(10px);
+}
+.chip-gold{background:rgba(245,197,24,.12);border:1px solid rgba(245,197,24,.3);color:var(--gold);}
+.chip-red{background:rgba(200,16,46,.12);border:1px solid rgba(200,16,46,.3);color:#ff4d6d;}
+.hero-scroll{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px;
+  animation:bounce 2s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
 
-.card{background:var(--gray);border-radius:12px;padding:1.2rem;border:1px solid var(--border);margin-bottom:1.2rem;}
-.card-title{font-size:13px;color:var(--gold);margin-bottom:1rem;font-weight:600;}
+/* ===== SECTIONS ===== */
+.section{display:none;padding:3rem 2rem;max-width:1140px;margin:0 auto;}
+.section.active{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-.form-row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
-.fg{display:flex;flex-direction:column;gap:5px;flex:1;min-width:140px;}
-label{font-size:11px;color:#888;}
-input,select,textarea{
-  background:var(--lgray);border:1px solid var(--border);border-radius:8px;
-  color:var(--white);padding:9px 11px;font-size:13px;
-  font-family:inherit;outline:none;transition:border-color .15s;width:100%;
-}
-input:focus,select:focus,textarea:focus{border-color:var(--gold);}
-select option{background:var(--gray);}
-textarea{resize:vertical;min-height:75px;}
+.sec-header{margin-bottom:2rem;}
+.sec-header h2{font-size:1.5rem;font-weight:800;color:var(--white);}
+.sec-header p{font-size:13px;color:var(--muted);margin-top:4px;}
+.sec-divider{height:2px;width:50px;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:2px;margin:10px 0 0;}
 
-/* Upload area */
-.upload-area{
-  border:2px dashed var(--border);border-radius:10px;
-  padding:1.5rem;text-align:center;cursor:pointer;
-  transition:all .2s;position:relative;
+/* ===== GALLERY ===== */
+.g-tabs{display:flex;gap:8px;margin-bottom:1.5rem;}
+.g-tab{
+  background:var(--card);border:1px solid var(--border);
+  color:var(--muted);padding:7px 18px;border-radius:20px;
+  cursor:pointer;font-size:12.5px;font-family:'Cairo',sans-serif;
+  font-weight:700;transition:all .18s;
 }
-.upload-area:hover,.upload-area.drag{border-color:var(--gold);background:rgba(245,197,24,.05);}
-.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-icon{font-size:2rem;margin-bottom:8px;}
-.upload-text{font-size:13px;color:#888;}
-.upload-text strong{color:var(--gold);}
-.preview-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-.prev-img{
-  width:80px;height:60px;border-radius:8px;object-fit:cover;
-  border:2px solid var(--gold);position:relative;
+.g-tab.active{background:rgba(245,197,24,.12);color:var(--gold);border-color:rgba(245,197,24,.3);}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.g-card{
+  background:var(--card);border-radius:16px;overflow:hidden;
+  border:1px solid var(--border);cursor:pointer;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
 }
-.prev-wrap{position:relative;display:inline-block;}
-.prev-del{
-  position:absolute;top:-6px;right:-6px;background:var(--red);
-  border:none;border-radius:50%;width:18px;height:18px;
-  color:#fff;font-size:10px;cursor:pointer;
+.g-card:hover{transform:translateY(-5px);border-color:rgba(245,197,24,.3);box-shadow:0 12px 30px rgba(0,0,0,.4);}
+.g-thumb{width:100%;aspect-ratio:16/9;background:var(--card2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.g-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-card:hover .g-thumb img{transform:scale(1.05);}
+.g-play{
+  position:absolute;inset:0;background:rgba(0,0,0,.5);
   display:flex;align-items:center;justify-content:center;
 }
-.progress-bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden;display:none;}
-.progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .3s;}
+.g-play-btn{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(245,197,24,.9);display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;transition:transform .2s;
+}
+.g-card:hover .g-play-btn{transform:scale(1.1);}
+.g-info{padding:12px 14px;}
+.g-info h3{font-size:13.5px;font-weight:700;margin-bottom:3px;}
+.g-info p{font-size:11px;color:var(--muted);}
+.g-badge{
+  position:absolute;top:8px;right:8px;
+  background:rgba(7,8,10,.8);backdrop-filter:blur(8px);
+  border:1px solid var(--border);border-radius:6px;
+  padding:3px 8px;font-size:10px;color:var(--gold);font-weight:700;
+}
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:4rem 2rem;
+  color:var(--muted);
+}
+.empty-state .es-icon{font-size:3rem;margin-bottom:12px;opacity:.4;}
+.empty-state p{font-size:14px;}
 
-.btn{padding:9px 18px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
-.btn-gold{background:var(--gold);color:var(--dark);}
-.btn-gold:hover{background:#ffda44;}
-.btn-red{background:var(--red);color:#fff;}
-.btn-red:hover{background:#e8112d;}
-.btn-gray{background:var(--lgray);color:#aaa;border:1px solid var(--border);}
-
-.items-list{display:flex;flex-direction:column;gap:8px;margin-top:1rem;}
-.item-row{
-  display:flex;align-items:center;gap:10px;
-  background:var(--lgray);border-radius:8px;padding:9px 12px;
+/* ===== ABOUT ===== */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem;}
+.about-card{
+  background:var(--card);border-radius:16px;padding:1.5rem;
   border:1px solid var(--border);
 }
-.item-thumb{width:52px;height:38px;border-radius:6px;background:#333;overflow:hidden;flex-shrink:0;border:1px solid var(--border);}
-.item-thumb img{width:100%;height:100%;object-fit:cover;}
-.item-info{flex:1;}
-.item-info strong{font-size:13px;display:block;}
-.item-info span{font-size:11px;color:#777;}
+.about-card h3{
+  font-size:.85rem;font-weight:800;color:var(--gold);
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.about-card p{font-size:14px;color:#b0bdd0;line-height:1.9;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.stat{
+  background:var(--card);border-radius:14px;padding:1.2rem;
+  text-align:center;border:1px solid var(--border);
+  transition:border-color .2s;
+}
+.stat:hover{border-color:rgba(245,197,24,.3);}
+.stat-n{font-size:1.8rem;font-weight:900;color:var(--gold);line-height:1;}
+.stat-l{font-size:11px;color:var(--muted);margin-top:5px;}
 
-.status{padding:9px 13px;border-radius:8px;font-size:13px;margin-bottom:1rem;display:none;}
-.status.show{display:block;}
-.status.ok{background:rgba(0,180,80,.15);border:1px solid #0a5;color:#0d0;}
-.status.err{background:rgba(200,0,0,.15);border:1px solid #a00;color:#f66;}
+/* ===== TEAM ===== */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
+.team-card{
+  background:var(--card);border-radius:18px;padding:1.5rem 1rem;
+  text-align:center;border:1px solid var(--border);
+  transition:all .2s;
+}
+.team-card:hover{border-color:rgba(245,197,24,.3);transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,.4);}
+.tc-av{
+  width:80px;height:80px;border-radius:50%;margin:0 auto 12px;
+  border:3px solid var(--gold);overflow:hidden;
+  background:var(--card2);display:flex;align-items:center;justify-content:center;
+  font-size:2rem;box-shadow:0 0 20px rgba(245,197,24,.2);
+}
+.tc-av img{width:100%;height:100%;object-fit:cover;}
+.team-card h3{font-size:14px;font-weight:800;margin-bottom:4px;}
+.tc-role{
+  display:inline-block;background:rgba(245,197,24,.1);
+  border:1px solid rgba(245,197,24,.2);color:var(--gold);
+  padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;
+  margin-bottom:8px;
+}
+.tc-phone{font-size:12px;color:var(--muted);direction:ltr;}
 
-@media(max-width:650px){
-  .layout{flex-direction:column;}
-  .sidebar{width:100%;display:flex;overflow-x:auto;padding:.4rem;border-left:none;border-bottom:1px solid var(--border);}
-  .sb-btn{white-space:nowrap;border-right:none;border-bottom:3px solid transparent;padding:9px 12px;}
-  .sb-btn.active{border-bottom-color:var(--gold);border-right:none;}
+/* ===== SOCIAL ===== */
+.social-links-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2rem;}
+.social-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:12px;
+  font-size:13.5px;font-weight:800;color:#fff;
+  cursor:pointer;border:none;font-family:'Cairo',sans-serif;
+  transition:transform .18s,box-shadow .18s;
+}
+.social-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+.plat-fb{background:#1877f2;}
+.plat-yt{background:#ff0000;}
+.plat-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+.plat-tw{background:#000;border:1px solid #333;}
+.plat-wa{background:#25d366;}
+.plat-tk{background:#010101;border:1px solid #333;}
+.social-vids-title{font-size:1rem;font-weight:800;color:var(--white);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+
+/* ===== MEMBERSHIP ===== */
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:1.5rem;}
+.benefit-card{
+  background:var(--card);border-radius:16px;padding:1.5rem;
+  border:1px solid var(--border);display:flex;gap:14px;
+  transition:all .2s;
+}
+.benefit-card:hover{border-color:rgba(245,197,24,.25);transform:translateY(-3px);}
+.benefit-icon{
+  width:50px;height:50px;border-radius:12px;flex-shrink:0;
+  background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+}
+.benefit-card h3{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:5px;}
+.benefit-card p{font-size:13px;color:var(--muted);line-height:1.7;}
+.join-cta{
+  background:linear-gradient(135deg,var(--card),var(--card2));
+  border:1px solid rgba(245,197,24,.25);border-radius:20px;
+  padding:2.5rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.join-cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,.08),transparent 60%);
+}
+.join-cta h3{font-size:1.3rem;font-weight:900;color:var(--white);margin-bottom:8px;position:relative;}
+.join-cta p{font-size:13.5px;color:var(--muted);margin-bottom:1.5rem;position:relative;}
+.join-btn{
+  background:linear-gradient(135deg,var(--gold),#e6a800);
+  color:#0a0a0a;border:none;padding:14px 36px;
+  border-radius:30px;font-size:14.5px;font-weight:900;
+  cursor:pointer;font-family:'Cairo',sans-serif;
+  transition:all .2s;position:relative;
+  box-shadow:0 4px 20px rgba(245,197,24,.3);
+}
+.join-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(245,197,24,.4);}
+
+/* ===== LIGHTBOX ===== */
+.lb{
+  position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:999;
+  display:none;align-items:center;justify-content:center;
+  padding:1rem;
+}
+.lb.open{display:flex;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.lb img{max-width:94vw;max-height:90vh;border-radius:12px;border:2px solid rgba(245,197,24,.3);}
+.lb-x{
+  position:fixed;top:16px;left:20px;
+  background:rgba(200,16,46,.8);border:none;color:#fff;
+  width:38px;height:38px;border-radius:50%;font-size:1.1rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  border-top:1px solid var(--border);
+  padding:3rem 2rem;text-align:center;
+  background:linear-gradient(180deg,var(--dark),#050608);
+  margin-top:2rem;
+}
+.footer-logo{
+  width:60px;height:60px;border-radius:50%;
+  border:2px solid rgba(245,197,24,.4);object-fit:cover;
+  margin:0 auto 12px;display:block;
+}
+footer h3{font-size:1rem;font-weight:800;color:var(--gold);margin-bottom:4px;}
+footer p{font-size:12px;color:var(--muted);}
+.footer-stripe{
+  display:flex;justify-content:center;gap:6px;margin:16px 0;
+}
+.stripe{height:3px;width:40px;border-radius:2px;}
+.s1{background:var(--red);}
+.s2{background:#fff;}
+.s3{background:var(--gold);}
+.footer-wm{font-size:11px;color:#2d3748;margin-top:12px;}
+
+@media(max-width:750px){
+  nav{padding:0 1rem;}
+  .nb{padding:6px 8px;font-size:11px;}
+  .hero h1{font-size:1.7rem;}
+  .hero-logo-ring{width:110px;height:110px;}
+  .about-layout,.stats-row{grid-template-columns:1fr 1fr;}
+  .section{padding:2rem 1rem;}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="hdr-logo">
-    <img id="hdr-logo-img" src="" alt="Logo">
-    <div class="hdr-title">
-      لوحة التحكم
-      <span>Peña Madridista · Café Madrid Cairo</span>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img class="nav-logo-img" id="nav-logo" src="" alt="L" onerror="this.style.display='none'">
+    <div class="nav-logo-txt">
+      <strong>Peña Madridista Cairo</strong>
+      <span>رابطة تشجيع ريال مدريد المصرية</span>
     </div>
   </div>
-  <span style="font-size:12px;color:#555;">⚙️ Admin Panel</span>
-</header>
-
-<div class="layout">
-  <div class="sidebar">
-    <button class="sb-btn active" onclick="showPanel('gallery',this)">📸 الصور والفيديوهات</button>
-    <button class="sb-btn" onclick="showPanel('about',this)">📖 عنا وتاريخنا</button>
-    <button class="sb-btn" onclick="showPanel('team',this)">👥 تيم العمل</button>
-    <button class="sb-btn" onclick="showPanel('social',this)">📱 سوشيال ميديا</button>
-    <button class="sb-btn" onclick="showPanel('membership',this)">⭐ العضوية</button>
+  <div class="nav-links">
+    <button class="nb active" onclick="showS('gallery',this)">📸 صور</button>
+    <button class="nb" onclick="showS('about',this)">📖 عنا</button>
+    <button class="nb" onclick="showS('team',this)">👥 التيم</button>
+    <button class="nb" onclick="showS('social',this)">📱 سوشيال</button>
+    <button class="nb" onclick="showS('membership',this)">⭐ العضوية</button>
   </div>
+</nav>
 
-  <div class="content">
-
-    <!-- GALLERY -->
-    <div class="panel active" id="panel-gallery">
-      <div class="panel-title">📸 الصور والفيديوهات</div>
-      <div id="st-gallery" class="status"></div>
-      <div class="card">
-        <div class="card-title">إضافة محتوى جديد</div>
-        <div class="form-row">
-          <div class="fg">
-            <label>النوع</label>
-            <select id="g-type" onchange="toggleVideoUrl()">
-              <option value="photo">📷 صورة</option>
-              <option value="video">🎬 فيديو (رابط)</option>
-            </select>
-          </div>
-          <div class="fg">
-            <label>العنوان</label>
-            <input type="text" id="g-title" placeholder="مثال: تجمع نهائي 2024">
-          </div>
-          <div class="fg">
-            <label>التاريخ</label>
-            <input type="date" id="g-date">
-          </div>
-        </div>
-
-        <!-- Photo upload -->
-        <div id="photo-upload-area">
-          <div class="upload-area" id="drop-zone">
-            <input type="file" id="g-files" accept="image/*" multiple onchange="handleFiles(this.files)">
-            <div class="upload-icon">📁</div>
-            <div class="upload-text">اسحب الصور هنا أو <strong>اختر من الجهاز</strong></div>
-            <div class="upload-text" style="font-size:11px;margin-top:4px;">PNG, JPG, WEBP · سيتم ضغط الصور تلقائياً</div>
-          </div>
-          <div class="preview-grid" id="preview-grid"></div>
-          <div class="progress-bar" id="prog-bar"><div class="progress-fill" id="prog-fill"></div></div>
-        </div>
-
-        <!-- Video URL -->
-        <div id="video-url-area" style="display:none;">
-          <div class="form-row">
-            <div class="fg">
-              <label>رابط الفيديو</label>
-              <input type="text" id="g-url" placeholder="https://youtube.com/...">
-            </div>
-            <div class="fg">
-              <label>رابط الصورة المصغرة (اختياري)</label>
-              <input type="text" id="g-thumb" placeholder="https://...">
-            </div>
-          </div>
-        </div>
-
-        <button class="btn btn-gold" style="margin-top:10px;" onclick="addGalleryItem()">➕ إضافة</button>
-      </div>
-      <div class="card">
-        <div class="card-title">المحتوى الحالي</div>
-        <div class="items-list" id="gallery-list"><div style="color:#555;font-size:13px;">جاري التحميل...</div></div>
-      </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-logo-ring">
+      <img class="hero-logo-img" id="hero-logo" src="" alt="Logo" onerror="this.outerHTML='<div class=hero-logo-fallback>⚽</div>'">
     </div>
-
-    <!-- ABOUT -->
-    <div class="panel" id="panel-about">
-      <div class="panel-title">📖 عنا وتاريخنا</div>
-      <div id="st-about" class="status"></div>
-      <div class="card"><div class="card-title">من نحن</div><textarea id="about-text" rows="4" placeholder="نص التعريف بالرابطة..."></textarea></div>
-      <div class="card"><div class="card-title">تاريخنا</div><textarea id="history-text" rows="4" placeholder="تاريخ الرابطة..."></textarea></div>
-      <div class="card">
-        <div class="card-title">الإحصائيات</div>
-        <div class="form-row">
-          <div class="fg"><label>سنوات</label><input id="stat-years" placeholder="16+"></div>
-          <div class="fg"><label>أعضاء</label><input id="stat-members" placeholder="1000+"></div>
-          <div class="fg"><label>تجمعات</label><input id="stat-events" placeholder="200+"></div>
-        </div>
-      </div>
-      <div class="card"><div class="card-title">نص دعوة الانضمام</div><textarea id="join-text" rows="2"></textarea></div>
-
-      <!-- Logo upload for about section -->
-      <div class="card">
-        <div class="card-title">الشعار الرسمي</div>
-        <div class="upload-area" style="padding:1rem;">
-          <input type="file" id="logo-file" accept="image/*" onchange="handleLogoUpload(this)">
-          <div class="upload-icon">🏆</div>
-          <div class="upload-text"><strong>ارفع الشعار</strong> (سيظهر في كل أنحاء الموقع)</div>
-        </div>
-        <div id="logo-preview" style="margin-top:10px;text-align:center;"></div>
-      </div>
-
-      <button class="btn btn-gold" onclick="saveAbout()">💾 حفظ الكل</button>
+    <div class="hero-eyebrow">🇪🇬 رابطة مصرية رسمية</div>
+    <h1>Peña Madridista<br>Café Madrid Cairo</h1>
+    <div class="hero-sub">عشاق ريال مدريد في مصر منذ 2008</div>
+    <div class="hero-chips">
+      <span class="chip chip-gold">🏆 15× أبطال أوروبا</span>
+      <span class="chip chip-red">🔴 EST. 2008</span>
+      <span class="chip chip-gold">🤍 Hala Madrid!</span>
     </div>
-
-    <!-- TEAM -->
-    <div class="panel" id="panel-team">
-      <div class="panel-title">👥 تيم العمل</div>
-      <div id="st-team" class="status"></div>
-      <div class="card">
-        <div class="card-title">إضافة عضو</div>
-        <div class="form-row">
-          <div class="fg"><label>الاسم</label><input id="t-name" placeholder="الاسم الكامل"></div>
-          <div class="fg"><label>المنصب</label><input id="t-role" placeholder="رئيس الرابطة..."></div>
-          <div class="fg"><label>التليفون</label><input id="t-phone" placeholder="+20 1xx..."></div>
-        </div>
-        <label style="margin-bottom:6px;display:block;">صورة العضو</label>
-        <div class="upload-area" style="padding:1rem;" id="team-drop">
-          <input type="file" id="t-photo-file" accept="image/*" onchange="handleTeamPhoto(this)">
-          <div class="upload-icon">👤</div>
-          <div class="upload-text"><strong>ارفع صورة</strong> العضو من الجهاز</div>
-        </div>
-        <div id="t-photo-preview" style="margin-top:8px;"></div>
-        <button class="btn btn-gold" style="margin-top:10px;" onclick="addTeamMember()">➕ إضافة عضو</button>
-      </div>
-      <div class="card">
-        <div class="card-title">أعضاء التيم</div>
-        <div class="items-list" id="team-list"><div style="color:#555;font-size:13px;">جاري التحميل...</div></div>
-      </div>
-    </div>
-
-    <!-- SOCIAL -->
-    <div class="panel" id="panel-social">
-      <div class="panel-title">📱 سوشيال ميديا</div>
-      <div id="st-social" class="status"></div>
-      <div class="card">
-        <div class="card-title">روابط السوشيال ميديا</div>
-        <div class="form-row">
-          <div class="fg">
-            <label>المنصة</label>
-            <select id="s-platform">
-              <option value="facebook">Facebook</option>
-              <option value="youtube">YouTube</option>
-              <option value="instagram">Instagram</option>
-              <option value="twitter">Twitter / X</option>
-              <option value="whatsapp">WhatsApp</option>
-              <option value="tiktok">TikTok</option>
-            </select>
-          </div>
-          <div class="fg"><label>الرابط</label><input id="s-url" placeholder="https://..."></div>
-        </div>
-        <button class="btn btn-gold" onclick="addSocialLink()">➕ إضافة</button>
-        <div class="items-list" id="social-list"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">فيديوهات عن الرابطة</div>
-        <div class="form-row">
-          <div class="fg"><label>العنوان</label><input id="sv-title" placeholder="اسم الفيديو"></div>
-          <div class="fg"><label>الرابط</label><input id="sv-url" placeholder="https://youtube.com/..."></div>
-        </div>
-        <button class="btn btn-gold" onclick="addSocialVideo()">➕ إضافة فيديو</button>
-        <div class="items-list" id="social-video-list"></div>
-      </div>
-    </div>
-
-    <!-- MEMBERSHIP -->
-    <div class="panel" id="panel-membership">
-      <div class="panel-title">⭐ العضوية</div>
-      <div id="st-membership" class="status"></div>
-      <div class="card">
-        <div class="card-title">إضافة ميزة</div>
-        <div class="form-row">
-          <div class="fg" style="max-width:80px;"><label>أيقونة</label><input id="b-icon" placeholder="🏆"></div>
-          <div class="fg"><label>العنوان</label><input id="b-title" placeholder="مشاهدة المباريات"></div>
-        </div>
-        <div class="fg"><label>الوصف</label><textarea id="b-desc" rows="2" placeholder="وصف الميزة..."></textarea></div>
-        <button class="btn btn-gold" style="margin-top:10px;" onclick="addBenefit()">➕ إضافة</button>
-        <div class="items-list" id="benefits-list"></div>
-      </div>
-    </div>
-
   </div>
+  <div class="hero-scroll">
+    <span>↓</span>
+    <span>اكتشف</span>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="section active" id="sec-gallery">
+  <div class="sec-header">
+    <h2>📸 صور وفيديوهات التجمعات</h2>
+    <div class="sec-divider"></div>
+    <p>لحظات لا تُنسى مع عائلة Madridista</p>
+  </div>
+  <div class="g-tabs">
+    <button class="g-tab active" onclick="filterG('all',this)">الكل</button>
+    <button class="g-tab" onclick="filterG('photo',this)">📷 صور</button>
+    <button class="g-tab" onclick="filterG('video',this)">🎬 فيديوهات</button>
+  </div>
+  <div class="g-grid" id="g-grid">
+    <div class="empty-state"><div class="es-icon">📷</div><p>جاري التحميل...</p></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section" id="sec-about">
+  <div class="sec-header">
+    <h2>📖 عنا وتاريخ الرابطة</h2>
+    <div class="sec-divider"></div>
+    <p>قصة الشغف بريال مدريد في مصر</p>
+  </div>
+  <div class="about-layout">
+    <div class="about-card">
+      <h3>🏟️ من نحن</h3>
+      <p id="about-text">رابطة Peña Madridista Café Madrid Cairo هي رابطة التشجيع الرسمية لريال مدريد في مصر.</p>
+    </div>
+    <div class="about-card">
+      <h3>📅 تاريخنا</h3>
+      <p id="history-text">بدأت الرابطة رحلتها عام 2008 كمجموعة صغيرة من عشاق ريال مدريد في القاهرة.</p>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n" id="s-years">16+</div><div class="stat-l">سنوات خبرة</div></div>
+    <div class="stat"><div class="stat-n" id="s-members">1K+</div><div class="stat-l">عضو نشط</div></div>
+    <div class="stat"><div class="stat-n" id="s-events">200+</div><div class="stat-l">تجمع</div></div>
+    <div class="stat"><div class="stat-n">15</div><div class="stat-l">لقب أوروبي</div></div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div class="section" id="sec-team">
+  <div class="sec-header">
+    <h2>👥 تيم العمل</h2>
+    <div class="sec-divider"></div>
+    <p>الأبطال اللي بيشغلوا الرابطة</p>
+  </div>
+  <div class="team-grid" id="team-grid">
+    <div class="empty-state" style="grid-column:1/-1"><div class="es-icon">👥</div><p>جاري التحميل...</p></div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div class="section" id="sec-social">
+  <div class="sec-header">
+    <h2>📱 سوشيال ميديا</h2>
+    <div class="sec-divider"></div>
+    <p>تابعنا على كل المنصات</p>
+  </div>
+  <div class="social-links-grid" id="social-links-c">
+    <div style="color:var(--muted);font-size:13px;">جاري التحميل...</div>
+  </div>
+  <div class="social-vids-title">🎬 فيديوهات الرابطة</div>
+  <div class="g-grid" id="social-vids">
+    <div class="empty-state"><div class="es-icon">🎬</div><p>لا يوجد فيديوهات بعد</p></div>
+  </div>
+</div>
+
+<!-- MEMBERSHIP -->
+<div class="section" id="sec-membership">
+  <div class="sec-header">
+    <h2>⭐ العضوية</h2>
+    <div class="sec-divider"></div>
+    <p>انضم لعائلة Madridista واستمتع بمميزات حصرية</p>
+  </div>
+  <div class="benefits-grid" id="benefits-grid">
+    <div class="benefit-card"><div class="benefit-icon">🏟️</div><div><h3>مشاهدة المباريات</h3><p>تجمعات حصرية لمشاهدة مباريات ريال مدريد</p></div></div>
+    <div class="benefit-card"><div class="benefit-icon">👕</div><div><h3>منتجات حصرية</h3><p>تيشيرتات وهدايا بأسعار مميزة للأعضاء</p></div></div>
+    <div class="benefit-card"><div class="benefit-icon">🤝</div><div><h3>شبكة مشجعين</h3><p>تواصل مع آلاف مشجعي ريال مدريد في مصر</p></div></div>
+    <div class="benefit-card"><div class="benefit-icon">🎉</div><div><h3>فعاليات وحفلات</h3><p>دعوات حصرية للاحتفالات والفعاليات</p></div></div>
+  </div>
+  <div class="join-cta">
+    <h3>🌟 كن جزء من العائلة!</h3>
+    <p id="join-text">تواصل معنا عبر السوشيال ميديا وانضم لأكبر رابطة مدريدية في مصر!</p>
+    <button class="join-btn" onclick="showS('social',document.querySelectorAll('.nb')[3])">تواصل معنا الآن ⚽</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img class="footer-logo" id="footer-logo" src="" alt="Logo" onerror="this.style.display='none'">
+  <h3>Peña Madridista · Café Madrid Cairo</h3>
+  <p>رابطة تشجيع ريال مدريد المصرية</p>
+  <div class="footer-stripe">
+    <div class="stripe s1"></div>
+    <div class="stripe s2"></div>
+    <div class="stripe s3"></div>
+  </div>
+  <p>© 2024 · EST. 2008 · Hala Madrid y Hala Madrid! 🤍</p>
+  <p class="footer-wm">Built with ❤️ by programmer Malik El-Bialy · 📱 +966 54 730 8744</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLB()">
+  <button class="lb-x" onclick="closeLB()">✕</button>
+  <img id="lb-img" src="" alt="">
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -323,295 +466,116 @@ const FC={apiKey:"AIzaSyBFZ4F91CFPTgeLKVNT0QHN-TDgJw92koc",authDomain:"pena-madr
 if(!firebase.apps.length)firebase.initializeApp(FC);
 const db=firebase.firestore();
 
-let pendingPhotos=[];
-let teamPhotoB64='';
-let socialDoc={links:[],videos:[]};
-let benefitsData=[];
+let galleryData=[];let curFilter='all';
 
-// ---- UI ----
-function showPanel(id,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  btn.classList.add('active');
+function showS(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
 }
-function showSt(id,msg,type){
-  const el=document.getElementById('st-'+id);
-  el.textContent=msg;el.className='status show '+type;
-  setTimeout(()=>el.classList.remove('show'),3500);
-}
-function toggleVideoUrl(){
-  const t=document.getElementById('g-type').value;
-  document.getElementById('photo-upload-area').style.display=t==='photo'?'block':'none';
-  document.getElementById('video-url-area').style.display=t==='video'?'block':'none';
+function filterG(type,btn){
+  curFilter=type;
+  document.querySelectorAll('.g-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderGallery();
 }
 
-// ---- IMAGE COMPRESS ----
-function compressImage(file,maxW=900,quality=0.72){
-  return new Promise(res=>{
-    const r=new FileReader();
-    r.onload=e=>{
-      const img=new Image();
-      img.onload=()=>{
-        const c=document.createElement('canvas');
-        let w=img.width,h=img.height;
-        if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
-        c.width=w;c.height=h;
-        c.getContext('2d').drawImage(img,0,0,w,h);
-        res(c.toDataURL('image/jpeg',quality));
-      };
-      img.src=e.target.result;
-    };
-    r.readAsDataURL(file);
+function renderGallery(){
+  const grid=document.getElementById('g-grid');
+  const data=curFilter==='all'?galleryData:galleryData.filter(i=>i.type===curFilter);
+  if(!data.length){
+    grid.innerHTML='<div class="empty-state"><div class="es-icon">📷</div><p>لا يوجد محتوى بعد</p></div>';
+    return;
+  }
+  grid.innerHTML=data.map(item=>`
+    <div class="g-card" onclick="${item.type==='photo'?`openLB('${item.url.replace(/'/g,"\\'")}')`:``}">
+      <div class="g-thumb">
+        <span class="g-badge">${item.type==='photo'?'📷':'🎬'}</span>
+        ${item.type==='photo'
+          ?`<img src="${item.url}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=color:#333;font-size:2rem;text-align:center>🖼️</div>'">`
+          :`<img src="${item.thumb||''}" onerror="this.style.display='none'">
+            <div class="g-play" onclick="window.open('${item.url}','_blank')">
+              <div class="g-play-btn">▶</div>
+            </div>`}
+      </div>
+      <div class="g-info"><h3>${item.title||''}</h3><p>${item.date||''}</p></div>
+    </div>`).join('');
+}
+
+function openLB(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');}
+function closeLB(){document.getElementById('lb').classList.remove('open');}
+
+function setLogos(url){
+  ['nav-logo','hero-logo','footer-logo'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.src=url;
   });
 }
 
-// ---- GALLERY ----
-async function handleFiles(files){
-  const grid=document.getElementById('preview-grid');
-  const bar=document.getElementById('prog-bar');
-  const fill=document.getElementById('prog-fill');
-  bar.style.display='block';fill.style.width='0%';
-  for(let i=0;i<files.length;i++){
-    const b64=await compressImage(files[i]);
-    pendingPhotos.push({b64,name:files[i].name});
-    const wrap=document.createElement('div');wrap.className='prev-wrap';
-    const img=document.createElement('img');img.src=b64;img.className='prev-img';
-    const del=document.createElement('button');del.className='prev-del';del.textContent='×';
-    const idx=pendingPhotos.length-1;
-    del.onclick=()=>{pendingPhotos.splice(idx,1);wrap.remove();};
-    wrap.appendChild(img);wrap.appendChild(del);grid.appendChild(wrap);
-    fill.style.width=Math.round((i+1)/files.length*100)+'%';
-  }
-  setTimeout(()=>{bar.style.display='none';},600);
-}
+const platColors={facebook:'plat-fb',youtube:'plat-yt',instagram:'plat-ig',twitter:'plat-tw',whatsapp:'plat-wa',tiktok:'plat-tk'};
+const platIcons={facebook:'f',youtube:'▶',instagram:'◎',twitter:'𝕏',whatsapp:'✆',tiktok:'♪'};
+const platNames={facebook:'Facebook',youtube:'YouTube',instagram:'Instagram',twitter:'Twitter / X',whatsapp:'WhatsApp',tiktok:'TikTok'};
 
-let galleryItems=[];
-async function loadGallery(){
+async function loadAll(){
   try{
-    const snap=await db.collection('gallery').orderBy('createdAt','desc').get();
-    galleryItems=snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderGalleryList();
-  }catch(e){document.getElementById('gallery-list').innerHTML='<div style="color:#f66;font-size:13px;">تأكد من Firebase Rules ✋</div>';}
-}
-function renderGalleryList(){
-  const list=document.getElementById('gallery-list');
-  if(!galleryItems.length){list.innerHTML='<div style="color:#555;font-size:13px;">لا يوجد محتوى بعد</div>';return;}
-  list.innerHTML=galleryItems.map(item=>`
-    <div class="item-row">
-      <div class="item-thumb"><img src="${item.type==='photo'?item.url:item.thumb||''}" onerror="this.style.display='none'"></div>
-      <div class="item-info"><strong>${item.type==='photo'?'📷':'🎬'} ${item.title||'بدون عنوان'}</strong><span>${item.date||''}</span></div>
-      <button class="btn btn-red" onclick="delGallery('${item.id}')">🗑️</button>
-    </div>`).join('');
-}
-async function addGalleryItem(){
-  const type=document.getElementById('g-type').value;
-  const title=document.getElementById('g-title').value.trim();
-  const date=document.getElementById('g-date').value;
-  if(type==='photo'){
-    if(!pendingPhotos.length){showSt('gallery','اختر صورة أولاً ⚠️','err');return;}
-    showSt('gallery','جاري الرفع...','ok');
-    for(const p of pendingPhotos){
-      await db.collection('gallery').add({type:'photo',title:title||p.name,url:p.b64,date,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-    }
-    pendingPhotos=[];
-    document.getElementById('preview-grid').innerHTML='';
-    document.getElementById('g-files').value='';
-  } else {
-    const url=document.getElementById('g-url').value.trim();
-    const thumb=document.getElementById('g-thumb').value.trim();
-    if(!url){showSt('gallery','ادخل رابط الفيديو ⚠️','err');return;}
-    await db.collection('gallery').add({type:'video',title,url,thumb,date,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-    document.getElementById('g-url').value='';
-    document.getElementById('g-thumb').value='';
-  }
-  document.getElementById('g-title').value='';
-  document.getElementById('g-date').value='';
-  showSt('gallery','تمت الإضافة ✅','ok');
-  loadGallery();
-}
-async function delGallery(id){
-  if(!confirm('هتحذف العنصر ده؟'))return;
-  await db.collection('gallery').doc(id).delete();
-  showSt('gallery','تم الحذف ✅','ok');loadGallery();
-}
-
-// ---- LOGO ----
-async function handleLogoUpload(inp){
-  const b64=await compressImage(inp.files[0],400,0.85);
-  document.getElementById('logo-preview').innerHTML=`<img src="${b64}" style="height:80px;border-radius:50%;border:3px solid var(--gold);">`;
-  await db.collection('settings').doc('logo').set({url:b64});
-  document.getElementById('hdr-logo-img').src=b64;
-  showSt('about','تم حفظ الشعار ✅','ok');
-}
-
-// ---- ABOUT ----
-async function loadAbout(){
-  try{
-    const snap=await db.collection('settings').doc('about').get();
-    if(snap.exists){
-      const d=snap.data();
-      if(d.about)document.getElementById('about-text').value=d.about;
-      if(d.history)document.getElementById('history-text').value=d.history;
-      if(d.years)document.getElementById('stat-years').value=d.years;
-      if(d.members)document.getElementById('stat-members').value=d.members;
-      if(d.events)document.getElementById('stat-events').value=d.events;
-      if(d.joinText)document.getElementById('join-text').value=d.joinText;
-    }
     const lSnap=await db.collection('settings').doc('logo').get();
-    if(lSnap.exists){
-      const u=lSnap.data().url;
-      document.getElementById('hdr-logo-img').src=u;
-      document.getElementById('logo-preview').innerHTML=`<img src="${u}" style="height:80px;border-radius:50%;border:3px solid var(--gold);">`;
+    if(lSnap.exists)setLogos(lSnap.data().url);
+
+    const gSnap=await db.collection('gallery').orderBy('createdAt','desc').get();
+    galleryData=gSnap.docs.map(d=>({id:d.id,...d.data()}));
+    renderGallery();
+
+    const aSnap=await db.collection('settings').doc('about').get();
+    if(aSnap.exists){
+      const a=aSnap.data();
+      if(a.about)document.getElementById('about-text').textContent=a.about;
+      if(a.history)document.getElementById('history-text').textContent=a.history;
+      if(a.years)document.getElementById('s-years').textContent=a.years;
+      if(a.members)document.getElementById('s-members').textContent=a.members;
+      if(a.events)document.getElementById('s-events').textContent=a.events;
+      if(a.joinText)document.getElementById('join-text').textContent=a.joinText;
     }
-  }catch(e){}
-}
-async function saveAbout(){
-  try{
-    await db.collection('settings').doc('about').set({
-      about:document.getElementById('about-text').value,
-      history:document.getElementById('history-text').value,
-      years:document.getElementById('stat-years').value,
-      members:document.getElementById('stat-members').value,
-      events:document.getElementById('stat-events').value,
-      joinText:document.getElementById('join-text').value
-    });
-    showSt('about','تم الحفظ ✅','ok');
-  }catch(e){showSt('about','خطأ: '+e.message,'err');}
+
+    const tSnap=await db.collection('team').get();
+    const team=tSnap.docs.map(d=>({id:d.id,...d.data()}));
+    const tg=document.getElementById('team-grid');
+    if(!team.length){tg.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">👥</div><p>لا يوجد أعضاء بعد</p></div>';}
+    else tg.innerHTML=team.map(m=>`
+      <div class="team-card">
+        <div class="tc-av">${m.photo?`<img src="${m.photo}" onerror="this.parentElement.innerHTML='👤'">`:'👤'}</div>
+        <h3>${m.name}</h3>
+        <div class="tc-role">${m.role||'عضو'}</div>
+        <div class="tc-phone">${m.phone||''}</div>
+      </div>`).join('');
+
+    const sSnap=await db.collection('settings').doc('social').get();
+    const social=sSnap.exists?sSnap.data():{links:[],videos:[]};
+    const sc=document.getElementById('social-links-c');
+    if(!social.links||!social.links.length)sc.innerHTML='<div style="color:var(--muted);font-size:13px;">لا يوجد روابط بعد</div>';
+    else sc.innerHTML=social.links.map(l=>`
+      <button class="social-btn ${platColors[l.platform]||''}" onclick="window.open('${l.url}','_blank')">
+        ${platNames[l.platform]||l.platform}
+      </button>`).join('');
+
+    const sv=document.getElementById('social-vids');
+    if(!social.videos||!social.videos.length)sv.innerHTML='<div class="empty-state"><div class="es-icon">🎬</div><p>لا يوجد فيديوهات</p></div>';
+    else sv.innerHTML=social.videos.map(v=>`
+      <div class="g-card" onclick="window.open('${v.url}','_blank')">
+        <div class="g-thumb"><div class="g-play"><div class="g-play-btn">▶</div></div></div>
+        <div class="g-info"><h3>${v.title}</h3></div>
+      </div>`).join('');
+
+    const bSnap=await db.collection('settings').doc('benefits').get();
+    if(bSnap.exists&&bSnap.data().list&&bSnap.data().list.length){
+      document.getElementById('benefits-grid').innerHTML=bSnap.data().list.map(b=>`
+        <div class="benefit-card">
+          <div class="benefit-icon">${b.icon}</div>
+          <div><h3>${b.title}</h3><p>${b.desc}</p></div>
+        </div>`).join('');
+    }
+  }catch(e){console.log('Firebase:',e);}
 }
 
-// ---- TEAM ----
-let teamItems=[];
-async function handleTeamPhoto(inp){
-  teamPhotoB64=await compressImage(inp.files[0],300,0.8);
-  document.getElementById('t-photo-preview').innerHTML=`<img src="${teamPhotoB64}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">`;
-}
-async function loadTeam(){
-  try{
-    const snap=await db.collection('team').get();
-    teamItems=snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderTeamList();
-  }catch(e){}
-}
-function renderTeamList(){
-  const list=document.getElementById('team-list');
-  if(!teamItems.length){list.innerHTML='<div style="color:#555;font-size:13px;">لا يوجد أعضاء</div>';return;}
-  list.innerHTML=teamItems.map(m=>`
-    <div class="item-row">
-      <div class="item-thumb">${m.photo?`<img src="${m.photo}" onerror="this.style.display='none'">`:'<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1.3rem;">👤</div>'}</div>
-      <div class="item-info"><strong>${m.name}</strong><span>${m.role||''} | ${m.phone||''}</span></div>
-      <button class="btn btn-red" onclick="delTeam('${m.id}')">🗑️</button>
-    </div>`).join('');
-}
-async function addTeamMember(){
-  const name=document.getElementById('t-name').value.trim();
-  if(!name){showSt('team','ادخل الاسم ⚠️','err');return;}
-  await db.collection('team').add({
-    name,
-    role:document.getElementById('t-role').value.trim(),
-    phone:document.getElementById('t-phone').value.trim(),
-    photo:teamPhotoB64,
-    createdAt:firebase.firestore.FieldValue.serverTimestamp()
-  });
-  document.getElementById('t-name').value='';
-  document.getElementById('t-role').value='';
-  document.getElementById('t-phone').value='';
-  document.getElementById('t-photo-file').value='';
-  document.getElementById('t-photo-preview').innerHTML='';
-  teamPhotoB64='';
-  showSt('team','تمت الإضافة ✅','ok');loadTeam();
-}
-async function delTeam(id){
-  if(!confirm('هتحذف العضو ده؟'))return;
-  await db.collection('team').doc(id).delete();
-  showSt('team','تم الحذف ✅','ok');loadTeam();
-}
-
-// ---- SOCIAL ----
-async function loadSocial(){
-  try{
-    const snap=await db.collection('settings').doc('social').get();
-    if(snap.exists)socialDoc=snap.data();
-    if(!socialDoc.links)socialDoc.links=[];
-    if(!socialDoc.videos)socialDoc.videos=[];
-    renderSocialList();renderSocialVideoList();
-  }catch(e){}
-}
-function renderSocialList(){
-  const list=document.getElementById('social-list');
-  if(!socialDoc.links.length){list.innerHTML='<div style="color:#555;font-size:13px;">لا يوجد روابط</div>';return;}
-  list.innerHTML=socialDoc.links.map((l,i)=>`
-    <div class="item-row">
-      <div class="item-info"><strong>${l.platform}</strong><span>${l.url}</span></div>
-      <button class="btn btn-red" onclick="delSocialLink(${i})">🗑️</button>
-    </div>`).join('');
-}
-function renderSocialVideoList(){
-  const list=document.getElementById('social-video-list');
-  if(!socialDoc.videos.length){list.innerHTML='<div style="color:#555;font-size:13px;">لا يوجد فيديوهات</div>';return;}
-  list.innerHTML=socialDoc.videos.map((v,i)=>`
-    <div class="item-row">
-      <div class="item-info"><strong>🎬 ${v.title}</strong><span>${v.url}</span></div>
-      <button class="btn btn-red" onclick="delSocialVideo(${i})">🗑️</button>
-    </div>`).join('');
-}
-async function saveSocial(){await db.collection('settings').doc('social').set(socialDoc);}
-async function addSocialLink(){
-  const url=document.getElementById('s-url').value.trim();
-  if(!url){showSt('social','ادخل الرابط ⚠️','err');return;}
-  socialDoc.links.push({platform:document.getElementById('s-platform').value,url});
-  document.getElementById('s-url').value='';
-  await saveSocial();showSt('social','تمت الإضافة ✅','ok');renderSocialList();
-}
-async function delSocialLink(i){socialDoc.links.splice(i,1);await saveSocial();renderSocialList();}
-async function addSocialVideo(){
-  const title=document.getElementById('sv-title').value.trim();
-  const url=document.getElementById('sv-url').value.trim();
-  if(!url){showSt('social','ادخل الرابط ⚠️','err');return;}
-  socialDoc.videos.push({title,url});
-  document.getElementById('sv-title').value='';document.getElementById('sv-url').value='';
-  await saveSocial();showSt('social','تمت الإضافة ✅','ok');renderSocialVideoList();
-}
-async function delSocialVideo(i){socialDoc.videos.splice(i,1);await saveSocial();renderSocialVideoList();}
-
-// ---- BENEFITS ----
-async function loadBenefits(){
-  try{
-    const snap=await db.collection('settings').doc('benefits').get();
-    if(snap.exists)benefitsData=snap.data().list||[];
-    renderBenefits();
-  }catch(e){}
-}
-function renderBenefits(){
-  const list=document.getElementById('benefits-list');
-  if(!benefitsData.length){list.innerHTML='<div style="color:#555;font-size:13px;">لا يوجد مميزات</div>';return;}
-  list.innerHTML=benefitsData.map((b,i)=>`
-    <div class="item-row">
-      <div class="item-info"><strong>${b.icon} ${b.title}</strong><span>${b.desc}</span></div>
-      <button class="btn btn-red" onclick="delBenefit(${i})">🗑️</button>
-    </div>`).join('');
-}
-async function addBenefit(){
-  const title=document.getElementById('b-title').value.trim();
-  if(!title){showSt('membership','ادخل العنوان ⚠️','err');return;}
-  benefitsData.push({icon:document.getElementById('b-icon').value.trim()||'⭐',title,desc:document.getElementById('b-desc').value.trim()});
-  await db.collection('settings').doc('benefits').set({list:benefitsData});
-  document.getElementById('b-icon').value='';document.getElementById('b-title').value='';document.getElementById('b-desc').value='';
-  showSt('membership','تمت الإضافة ✅','ok');renderBenefits();
-}
-async function delBenefit(i){
-  benefitsData.splice(i,1);
-  await db.collection('settings').doc('benefits').set({list:benefitsData});
-  showSt('membership','تم الحذف ✅','ok');renderBenefits();
-}
-
-// DRAG DROP
-const dz=document.getElementById('drop-zone');
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');handleFiles(e.dataTransfer.files);});
-
-loadGallery();loadAbout();loadTeam();loadSocial();loadBenefits();
+loadAll();
 </script>
 </body>
 </html>
